@@ -66,3 +66,93 @@ func (s *Server) ReDelegate(c echo.Context) error {
 
 	return c.JSON(http.StatusOK, reqTypes.Response{Tx: tx})
 }
+
+func (s *Server) UnDelegate(c echo.Context) error {
+	var (
+		request = &reqTypes.Request{
+			Msg: &reqTypes.UnDelegate{},
+		}
+		err error
+	)
+	err = c.Bind(request)
+	if err != nil {
+		//h.log.WithFields(logrus.Fields{
+		//	"event: ": "registration user",
+		//	"err: ":   err,
+		//	"time: ":  time.Now(),
+		//})
+
+		return c.JSON(http.StatusBadRequest, err.Error())
+	}
+
+	if err = request.Msg.Validate(); err != nil {
+		return c.JSON(http.StatusBadRequest, err.Error())
+	}
+
+	tx, err := s.Handler.UnDelegate(context.Background(), request)
+	if err != nil {
+		return c.JSON(http.StatusBadRequest, err.Error())
+	}
+
+	return c.JSON(http.StatusOK, reqTypes.Response{Tx: tx})
+}
+
+func (s *Server) CreateValidator(c echo.Context) error {
+	var (
+		request = &reqTypes.Request{
+			Msg: &reqTypes.CreateValidator{},
+		}
+		err error
+	)
+	err = c.Bind(request)
+	if err != nil {
+		//h.log.WithFields(logrus.Fields{
+		//	"event: ": "registration user",
+		//	"err: ":   err,
+		//	"time: ":  time.Now(),
+		//})
+
+		return c.JSON(http.StatusBadRequest, err.Error())
+	}
+
+	if err = request.Msg.Validate(); err != nil {
+		return c.JSON(http.StatusBadRequest, err.Error())
+	}
+
+	tx, err := s.Handler.CreateValidator(context.Background(), request)
+	if err != nil {
+		return c.JSON(http.StatusBadRequest, err.Error())
+	}
+
+	return c.JSON(http.StatusOK, reqTypes.Response{Tx: tx})
+}
+
+func (s *Server) EditValidator(c echo.Context) error {
+	var (
+		request = &reqTypes.Request{
+			Msg: &reqTypes.CreateValidator{},
+		}
+		err error
+	)
+	err = c.Bind(request)
+	if err != nil {
+		//h.log.WithFields(logrus.Fields{
+		//	"event: ": "registration user",
+		//	"err: ":   err,
+		//	"time: ":  time.Now(),
+		//})
+
+		return c.JSON(http.StatusBadRequest, err.Error())
+	}
+
+	if err = request.Msg.Validate(); err != nil {
+		return c.JSON(http.StatusBadRequest, err.Error())
+	}
+
+	tx, err := s.Handler.EditValidator(context.Background(), request)
+	if err != nil {
+		return c.JSON(http.StatusBadRequest, err.Error())
+	}
+
+	return c.JSON(http.StatusOK, reqTypes.Response{Tx: tx})
+}

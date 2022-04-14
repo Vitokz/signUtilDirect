@@ -41,10 +41,10 @@ func (s *Server) routing() {
 	gTx := s.Router.Group("/tx")
 
 	gTx.POST("/staking/delegate", s.Delegate)
-	gTx.POST("/staking/reDelegate", s.ReDelegate)
-	//gTx.POST("/staking/unbond")
-	//gTx.POST("/staking/create-validator")
-	//gTx.POST("/staking/edit-validator")
+	gTx.POST("/staking/redelegate", s.ReDelegate)
+	gTx.POST("/staking/unbond", s.UnDelegate)
+	gTx.POST("/staking/create_validator", s.CreateValidator)
+	gTx.POST("/staking/edit_validator", s.EditValidator)
 
 	gTx.POST("/sign", s.Sign)
 	_ = gTx
