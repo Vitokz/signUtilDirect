@@ -18,7 +18,7 @@ func (h *handler) Send(ctx context.Context, req *reqTypes.Request) ([]byte, erro
 		return nil, err
 	}
 
-	return h.buildAndSignTx(ctx, msg, params)
+	return h.buildAndSignTx(ctx, params, msg)
 }
 
 func convertSendMsg(req *reqTypes.Request) (*sdkBankTypes.MsgSend, error) {

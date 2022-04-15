@@ -47,8 +47,18 @@ func (s *Server) routing() {
 	sg.POST("/create_validator", s.createValidator)
 	sg.POST("/edit_validator", s.editValidator)
 
+	// --
 	bg := gTx.Group("/bank")
 	bg.POST("/send", s.send)
+
+	// --
+	dst := gTx.Group("/distribution")
+	dst.POST("/fund_community_pool", s.fundCommunityPool)
+	dst.POST("/set_withdraw_address", s.setWithdrawAddress)
+	dst.POST("/withdraw_delegator_reward", s.withdrawDelegatorReward)
+	dst.POST("/withdraw_all_delegator_reward", s.withdrawAllDelegatorRewards)
+
+	//--
 
 	gTx.POST("/sign", s.sign)
 	_ = gTx

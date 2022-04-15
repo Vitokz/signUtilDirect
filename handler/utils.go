@@ -10,13 +10,13 @@ import (
 	"github.com/pkg/errors"
 )
 
-func (h *handler) buildAndSignTx(ctx context.Context, msg sdk.Msg, params reqTypes.Params) ([]byte, error) {
+func (h *handler) buildAndSignTx(ctx context.Context, params reqTypes.Params, msg ...sdk.Msg) ([]byte, error) {
 	factory, err := h.createTxFactory(ctx, params)
 	if err != nil {
 		return nil, err
 	}
 
-	tx, err := factory.BuildUnsignedTx(msg)
+	tx, err := factory.BuildUnsignedTx(msg...)
 	if err != nil {
 		return nil, err
 	}

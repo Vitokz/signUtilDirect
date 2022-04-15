@@ -22,7 +22,7 @@ func (h *handler) Delegate(ctx context.Context, req *reqTypes.Request) ([]byte, 
 		return nil, err
 	}
 
-	return h.buildAndSignTx(ctx, msg, params)
+	return h.buildAndSignTx(ctx, params, msg)
 }
 
 func (h *handler) ReDelegate(ctx context.Context, req *reqTypes.Request) ([]byte, error) {
@@ -35,7 +35,7 @@ func (h *handler) ReDelegate(ctx context.Context, req *reqTypes.Request) ([]byte
 		return nil, err
 	}
 
-	return h.buildAndSignTx(ctx, msg, params)
+	return h.buildAndSignTx(ctx, params, msg)
 }
 
 func (h *handler) UnDelegate(ctx context.Context, req *reqTypes.Request) ([]byte, error) {
@@ -48,7 +48,7 @@ func (h *handler) UnDelegate(ctx context.Context, req *reqTypes.Request) ([]byte
 		return nil, err
 	}
 
-	return h.buildAndSignTx(ctx, msg, params)
+	return h.buildAndSignTx(ctx, params, msg)
 }
 
 func (h *handler) CreateValidator(ctx context.Context, req *reqTypes.Request) ([]byte, error) {
@@ -61,7 +61,7 @@ func (h *handler) CreateValidator(ctx context.Context, req *reqTypes.Request) ([
 		return nil, err
 	}
 
-	return h.buildAndSignTx(ctx, msg, params)
+	return h.buildAndSignTx(ctx, params, msg)
 }
 
 func (h *handler) EditValidator(ctx context.Context, req *reqTypes.Request) ([]byte, error) {
@@ -74,7 +74,7 @@ func (h *handler) EditValidator(ctx context.Context, req *reqTypes.Request) ([]b
 		return nil, err
 	}
 
-	return h.buildAndSignTx(ctx, msg, params)
+	return h.buildAndSignTx(ctx, params, msg)
 }
 
 func convertDelegateMsg(req *reqTypes.Request) (*sdkStakingTypes.MsgDelegate, error) {

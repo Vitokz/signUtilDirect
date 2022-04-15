@@ -21,6 +21,9 @@ type Params struct {
 	// -- Only Sign Params
 	PrintSignatureOnly bool `json:"print_signature_only"`
 
+	// -- Distribution Params
+	Commission bool `json:"commission"`
+
 	// -- Other Params
 	Overwrite bool `json:"overwrite"`
 }

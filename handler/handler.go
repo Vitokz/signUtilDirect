@@ -16,6 +16,7 @@ type Handler interface {
 
 	handlerStakingInt
 	handlerBankInt
+	handlerDistributionInt
 }
 
 type handler struct {
@@ -51,4 +52,11 @@ type handlerStakingInt interface {
 
 type handlerBankInt interface {
 	Send(ctx context.Context, req *reqTypes.Request) ([]byte, error)
+}
+
+type handlerDistributionInt interface {
+	FundCommunityPool(ctx context.Context, req *reqTypes.Request) ([]byte, error)
+	SetWithdrawAddress(ctx context.Context, req *reqTypes.Request) ([]byte, error)
+	WithdrawDelegatorReward(ctx context.Context, req *reqTypes.Request) ([]byte, error)
+	WithdrawAllDelegatorRewards(ctx context.Context, req *reqTypes.Request) (map[int][]byte, error)
 }
