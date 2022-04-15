@@ -88,8 +88,12 @@ func (h *handler) takeAccountParams(ctx context.Context, builder *txFactory.Fact
 		return errors.Wrap(err, "failed to unpack account any data")
 	}
 
-	builder.AccountNumber = acc.GetAccountNumber()
-	builder.Sequence = acc.GetSequence()
+	if builder.AccountNumber == 0 || builder.AccountNumber < acc.GetAccountNumber() {
+		builder.AccountNumber = acc.GetAccountNumber()
+	}
+	if builder.Sequence == 0 || builder.Sequence < acc.GetSequence() {
+		builder.Sequence = acc.GetSequence()
+	}
 
 	return nil
 }

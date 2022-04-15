@@ -7,12 +7,13 @@ import (
 	"net/http"
 )
 
-func (s *Server) sign(c echo.Context) error {
+func (s *Server) send(c echo.Context) error {
 	var (
-		request = &reqTypes.UnsignedTxRequest{}
-		err     error
+		request = &reqTypes.Request{
+			Msg: &reqTypes.Send{},
+		}
+		err error
 	)
-
 	err = c.Bind(request)
 	if err != nil {
 		//h.log.WithFields(logrus.Fields{
@@ -24,7 +25,11 @@ func (s *Server) sign(c echo.Context) error {
 		return c.JSON(http.StatusBadRequest, err.Error())
 	}
 
-	tx, err := s.Handler.Sign(context.Background(), request)
+	if err = request.Msg.Validate(); err != nil {
+		return c.JSON(http.StatusBadRequest, err.Error())
+	}
+
+	tx, err := s.Handler.Send(context.Background(), request)
 	if err != nil {
 		return c.JSON(http.StatusBadRequest, err.Error())
 	}

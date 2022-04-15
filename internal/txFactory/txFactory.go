@@ -57,6 +57,14 @@ func NewTxFactory(params reqTypes.Params, txConfig client.TxConfig) (*Factory, e
 		SignMode:      signMode,
 	}
 
+	if params.Sequence != 0 {
+		f.AccountNumber = params.AccountNumber
+	}
+
+	if params.AccountNumber != 0 {
+		f.Sequence = params.Sequence
+	}
+
 	if f, err = f.WithFees(params.Fees); err != nil {
 		return nil, err
 	}

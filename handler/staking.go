@@ -80,7 +80,7 @@ func (h *handler) EditValidator(ctx context.Context, req *reqTypes.Request) ([]b
 func convertDelegateMsg(req *reqTypes.Request) (*sdkStakingTypes.MsgDelegate, error) {
 	delegateReq, ok := req.GetMsg().(*reqTypes.Delegate)
 	if !ok {
-		return nil, errors.New("failed to convert delegate structure")
+		return nil, errors.New("failed to convert delegate structure from interface")
 	}
 
 	coins, err := sdk.ParseCoinNormalized(delegateReq.Amount)
@@ -104,7 +104,7 @@ func convertDelegateMsg(req *reqTypes.Request) (*sdkStakingTypes.MsgDelegate, er
 func convertReDelegateMsg(req *reqTypes.Request) (*sdkStakingTypes.MsgBeginRedelegate, error) {
 	reDelegateReq, ok := req.GetMsg().(*reqTypes.ReDelegate)
 	if !ok {
-		return nil, errors.New("failed to convert reDelegate structure")
+		return nil, errors.New("failed to convert reDelegate structure from interface")
 	}
 
 	coins, err := sdk.ParseCoinNormalized(reDelegateReq.Amount)
@@ -133,7 +133,7 @@ func convertReDelegateMsg(req *reqTypes.Request) (*sdkStakingTypes.MsgBeginRedel
 func convertUnDelegateMsg(req *reqTypes.Request) (*sdkStakingTypes.MsgUndelegate, error) {
 	unDelegateReq, ok := req.GetMsg().(*reqTypes.Delegate)
 	if !ok {
-		return nil, errors.New("failed to convert unDelegate structure")
+		return nil, errors.New("failed to convert unDelegate structure from interface")
 	}
 
 	coins, err := sdk.ParseCoinNormalized(unDelegateReq.Amount)

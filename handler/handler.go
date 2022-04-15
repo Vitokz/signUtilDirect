@@ -14,7 +14,8 @@ import (
 type Handler interface {
 	Sign(ctx context.Context, req *reqTypes.UnsignedTxRequest) ([]byte, error)
 
-	handlerStaking
+	handlerStakingInt
+	handlerBankInt
 }
 
 type handler struct {
@@ -40,10 +41,14 @@ func New(cfg mycfg.Config) (*handler, error) {
 	}, nil
 }
 
-type handlerStaking interface {
+type handlerStakingInt interface {
 	Delegate(ctx context.Context, req *reqTypes.Request) ([]byte, error)
 	ReDelegate(ctx context.Context, req *reqTypes.Request) ([]byte, error)
 	UnDelegate(ctx context.Context, req *reqTypes.Request) ([]byte, error)
 	CreateValidator(ctx context.Context, req *reqTypes.Request) ([]byte, error)
 	EditValidator(ctx context.Context, req *reqTypes.Request) ([]byte, error)
+}
+
+type handlerBankInt interface {
+	Send(ctx context.Context, req *reqTypes.Request) ([]byte, error)
 }

@@ -40,12 +40,16 @@ func (s *Server) Start(cfg config.Config) {
 func (s *Server) routing() {
 	gTx := s.Router.Group("/tx")
 
-	gTx.POST("/staking/delegate", s.Delegate)
-	gTx.POST("/staking/redelegate", s.ReDelegate)
-	gTx.POST("/staking/unbond", s.UnDelegate)
-	gTx.POST("/staking/create_validator", s.CreateValidator)
-	gTx.POST("/staking/edit_validator", s.EditValidator)
+	sg := gTx.Group("/staking")
+	sg.POST("/delegate", s.delegate)
+	sg.POST("/redelegate", s.reDelegate)
+	sg.POST("/unbond", s.unDelegate)
+	sg.POST("/create_validator", s.createValidator)
+	sg.POST("/edit_validator", s.editValidator)
 
-	gTx.POST("/sign", s.Sign)
+	bg := gTx.Group("/bank")
+	bg.POST("/send", s.send)
+
+	gTx.POST("/sign", s.sign)
 	_ = gTx
 }

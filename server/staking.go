@@ -7,7 +7,7 @@ import (
 	"net/http"
 )
 
-func (s *Server) Delegate(c echo.Context) error {
+func (s *Server) delegate(c echo.Context) error {
 	var (
 		request = &reqTypes.Request{
 			Msg: &reqTypes.Delegate{},
@@ -37,7 +37,7 @@ func (s *Server) Delegate(c echo.Context) error {
 	return c.JSON(http.StatusOK, reqTypes.Response{Tx: tx})
 }
 
-func (s *Server) ReDelegate(c echo.Context) error {
+func (s *Server) reDelegate(c echo.Context) error {
 	var (
 		request = &reqTypes.Request{
 			Msg: &reqTypes.ReDelegate{},
@@ -67,7 +67,7 @@ func (s *Server) ReDelegate(c echo.Context) error {
 	return c.JSON(http.StatusOK, reqTypes.Response{Tx: tx})
 }
 
-func (s *Server) UnDelegate(c echo.Context) error {
+func (s *Server) unDelegate(c echo.Context) error {
 	var (
 		request = &reqTypes.Request{
 			Msg: &reqTypes.UnDelegate{},
@@ -97,7 +97,7 @@ func (s *Server) UnDelegate(c echo.Context) error {
 	return c.JSON(http.StatusOK, reqTypes.Response{Tx: tx})
 }
 
-func (s *Server) CreateValidator(c echo.Context) error {
+func (s *Server) createValidator(c echo.Context) error {
 	var (
 		request = &reqTypes.Request{
 			Msg: &reqTypes.CreateValidator{},
@@ -127,7 +127,7 @@ func (s *Server) CreateValidator(c echo.Context) error {
 	return c.JSON(http.StatusOK, reqTypes.Response{Tx: tx})
 }
 
-func (s *Server) EditValidator(c echo.Context) error {
+func (s *Server) editValidator(c echo.Context) error {
 	var (
 		request = &reqTypes.Request{
 			Msg: &reqTypes.CreateValidator{},
