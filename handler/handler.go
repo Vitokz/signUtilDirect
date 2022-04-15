@@ -17,6 +17,7 @@ type Handler interface {
 	handlerStakingInt
 	handlerBankInt
 	handlerDistributionInt
+	handlerFeegrant
 }
 
 type handler struct {
@@ -59,4 +60,9 @@ type handlerDistributionInt interface {
 	SetWithdrawAddress(ctx context.Context, req *reqTypes.Request) ([]byte, error)
 	WithdrawDelegatorReward(ctx context.Context, req *reqTypes.Request) ([]byte, error)
 	WithdrawAllDelegatorRewards(ctx context.Context, req *reqTypes.Request) (map[int][]byte, error)
+}
+
+type handlerFeegrant interface {
+	Grant(ctx context.Context, req *reqTypes.Request) ([]byte, error)
+	Revoke(ctx context.Context, req *reqTypes.Request) ([]byte, error)
 }
