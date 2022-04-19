@@ -18,6 +18,7 @@ type Handler interface {
 	handlerBankInt
 	handlerDistributionInt
 	handlerFeegrant
+	handlerGov
 }
 
 type handler struct {
@@ -65,4 +66,15 @@ type handlerDistributionInt interface {
 type handlerFeegrant interface {
 	Grant(ctx context.Context, req *reqTypes.Request) ([]byte, error)
 	Revoke(ctx context.Context, req *reqTypes.Request) ([]byte, error)
+}
+
+type handlerGov interface {
+	CancelSoftwareUpgradeProposal(ctx context.Context, req *reqTypes.Request) ([]byte, error)
+	CommunityPoolSpendProposal(ctx context.Context, req *reqTypes.Request) ([]byte, error)
+	ParameterChangeProposal(ctx context.Context, req *reqTypes.Request) ([]byte, error)
+	SoftwareUpgradeProposal(ctx context.Context, req *reqTypes.Request) ([]byte, error)
+
+	Deposit(ctx context.Context, req *reqTypes.Request) ([]byte, error)
+	Vote(ctx context.Context, req *reqTypes.Request) ([]byte, error)
+	VoteWeighted(ctx context.Context, req *reqTypes.Request) ([]byte, error)
 }
