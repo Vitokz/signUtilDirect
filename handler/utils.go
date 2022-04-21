@@ -66,10 +66,12 @@ func (h *handler) createTxFactory(ctx context.Context, params reqTypes.Params) (
 		return nil, errors.Wrap(err, "failed to create tx factory")
 	}
 
-	err = h.takeAccountParams(ctx, factory)
-	if err != nil {
-		return nil, err
-	}
+	factory.AccountNumber = params.AccountNumber
+	factory.Sequence = params.Sequence
+	//err = h.takeAccountParams(ctx, factory)
+	//if err != nil {
+	//	return nil, err
+	//}
 
 	return factory, nil
 }

@@ -12,7 +12,7 @@ import (
 )
 
 func TestNewWallet(t *testing.T) {
-	assert.NoError(t, os.Setenv("SIGN_APP_VAL_PRIV_KEY", "bcf2441a0087d841cd9e4a44fd37c7a09b87cf29ef7e1042a11797a049884d28"))
+	assert.NoError(t, os.Setenv("SIGN_APP_VAL_PRIV_KEY", "37ce34ea25b05dee92564e4fb0f8a020c1664913470548152dce8ae37f4fc11b"))
 	cfg := config.Parse()
 	wal := NewWallet(cfg)
 
@@ -34,4 +34,11 @@ func TestWallet_Sign(t *testing.T) {
 	sig, _, err := wal.Sign(sigHash.Bytes())
 	require.NoError(t, err)
 	require.Equal(t, expectedSig, sig)
+}
+
+func TestWallet_Mnemonic(t *testing.T) {
+	//msg2 := sdkTx.Fee{}
+	////msg := sdkBankTypes.MsgSend{}
+	//t.Log(proto.MessageName(&msg2))
+	//t.Log(wal.PubKey.)
 }
